@@ -1,12 +1,12 @@
-# JARVIS-v0.3: Character-Level Transformer from Scratch
+# mini-transformer-pytorch (v0.3)
 
-> A lightweight, decoder-only causal Transformer language model written entirely in native PyTorch. Built from first principles to study attention dynamics, backpropagation, and sequence modeling without reliance on high-level abstractions.
+> A lightweight, single-head causal Transformer decoder written from scratch in native PyTorch. Built from first principles to study tensor geometry, attention dynamics, and sequence modeling without reliance on high-level library abstractions.
 
 ---
 
 ## Overview
 
-**JARVIS-v0.3** is an experimental character-level decoder-only language model. The goal of this release is to validate the core mathematical pipeline of Transformer self-attention: mapping discrete tokens into vector spaces, injecting positional context, calculating causal attention scores, and updating weights via gradient descent.
+**mini-transformer-pytorch** is an experimental character-level decoder-only language model. The goal of this release is to validate the core mathematical pipeline of Transformer self-attention: mapping discrete tokens into vector spaces, injecting positional context, calculating causal attention scores, and updating weights via gradient descent.
 
 ### Key Technical Specs
 * **Tokenizer:** Custom character-level mapping (`vocab_size = 41`)
@@ -20,9 +20,22 @@
 
 ## Architectural Pipeline
 
+
+## Training Logs (v0.3 Baseline)
+
+Trained over 15,000 epochs on `corpus.txt` using a batch size of 1 with dynamic random chunk sampling:
+
+```text
+Epoch 0     | Loss: 3.82 | Text: ,,,,s!f7644g4gg22nn22xsax4agx!cx
+Epoch 2000  | Loss: 2.98 | Text: nn    n  a tetaet    o  t tn  n 
+Epoch 5000  | Loss: 2.68 | Text:     t  n   et      r     a nat t
+Epoch 13800 | Loss: 2.32 | Text: tene te  de  ,nd , , and an, ir 
+Epoch 14800 | Loss: 2.95 | Text: tnnhtinii inteten  tepea  ae  a
+
 ```text
 Input Sequence (e.g., "abcdefg")
         │
+
         ▼
    Tokenizer (Token IDs: [0, 1, 2, ...])
         │
@@ -43,10 +56,5 @@ Input Sequence (e.g., "abcdefg")
         ▼
   Linear Return Projection  [Batch, Seq_Len, Vocab_Size]
         │
-Epoch 0     | Loss: 3.82 | Text: ,,,,s!f7644g4gg22nn22xsax4agx!cx
-Epoch 2000  | Loss: 2.98 | Text: nn    n  a tetaet    o  t tn  n 
-Epoch 5000  | Loss: 2.68 | Text:     t  n   et      r     a nat t
-Epoch 13800 | Loss: 2.32 | Text: tene te  de  ,nd , , and an, ir 
-Epoch 14800 | Loss: 2.95 | Text: tnnhtinii inteten  tepea  ae  a
         ▼
   CrossEntropyLoss vs Shifted Target Sequence

@@ -1,0 +1,33 @@
+the quick brown fox jumps over the lazy dog. 
+0123456789
+abcdefghijklmnopqrstuvwxyz
+
+jarvis is an intelligent artificial assistant built from scratch using pytorch.
+a character transformer learns by predicting the next character in a sequence.
+tokenization turns raw text into numerical token ids that the model can process.
+positional embeddings give spatial context so the network knows character order.
+queries keys and values calculate attention scores using dot product matrix multiplication.
+the softmax function turns attention scores into probability distributions that sum to 1.
+cross entropy loss measures the difference between predictions and targets.
+backpropagation computes gradients and adamw updates the weights during training.
+
+once upon a time in a digital world a tiny transformer began to learn.
+it started with random guesses spitting out gibberish like r r 3r vr.
+after many epochs of gradient descent the loss dropped and patterns emerged.
+first it learned common letter pairs like th, he, in, er, an, and ed.
+then it learned whole words like hello, world, computer, algorithm, and system.
+finally it learned sentence structure with spaces, vowels, and consonants in order.
+
+system diagnostic check initialized.
+vram memory allocated 12gb gpu active.
+embedding dimension 32 units.
+sequence length 64 characters.
+learning rate 0.001 set to adamw optimizer.
+status training pipeline fully operational.
+
+1 2 3 4 5 6 7 8 9 0
+a b c d e f g h i j k l m n o p q r s t u v w x y z
+cat act tac dog god red bed fed led sed 
+the cat sat on the mat. the dog ran in the park.
+jarvis analyze the system. processing data complete.
+building a language model requires patience logic and iteration.

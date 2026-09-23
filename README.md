@@ -57,10 +57,10 @@ Epoch 5000  | Loss: 2.68 | Text:      t  n    et      r     a nat t
 Epoch 13800 | Loss: 2.32 | Text: tene te  de  ,nd , , and an, ir 
 Epoch 14800 | Loss: 2.95 | Text: tnnhtinii inteten  tepea  ae  a
 ```
-```markdown
 ## Project Structure
+```markdown
 
-```text
+
 .
 ├── corpus.txt          # Training text dataset
 ├── model.py            # CharacterTransformer PyTorch nn.Module architecture

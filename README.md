@@ -43,5 +43,10 @@ Input Sequence (e.g., "abcdefg")
         ▼
   Linear Return Projection  [Batch, Seq_Len, Vocab_Size]
         │
+Epoch 0     | Loss: 3.82 | Text: ,,,,s!f7644g4gg22nn22xsax4agx!cx
+Epoch 2000  | Loss: 2.98 | Text: nn    n  a tetaet    o  t tn  n 
+Epoch 5000  | Loss: 2.68 | Text:     t  n   et      r     a nat t
+Epoch 13800 | Loss: 2.32 | Text: tene te  de  ,nd , , and an, ir 
+Epoch 14800 | Loss: 2.95 | Text: tnnhtinii inteten  tepea  ae  a
         ▼
   CrossEntropyLoss vs Shifted Target Sequence

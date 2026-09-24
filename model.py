@@ -9,6 +9,7 @@
       super().__init__()
       self.embedding_layer = nn.Embedding(vocab_size, emedding_dimensions)
 
+
       self.position_embedding_layer = nn.Embedding(100, 32)
 
 
@@ -20,9 +21,10 @@
       #nukber
       self.return_layer = nn.Linear(32,41,bias=False)
 
+    
     def forward(self,inx):
-     
 
+      
       actualitems = self.embedding_layer(inx)
 
       seq_len = inx.shape[1]
@@ -31,6 +33,7 @@
 
       pos_indices = torch.arange(seq_len)
 
+      
       thatstuff = self.position_embedding_layer(pos_indices)
 
       x = actualitems + thatstuff
@@ -39,7 +42,7 @@
       qlayer = self.query_layer(x)
       klayer = self.key_layer(x)
       vlayer = self.value_layer(x)
-      
+
 
       #Here they now have gone through 3 layers and now it's time to calculate the score (percentages to see how much a letter realyl matters)
 
@@ -51,7 +54,7 @@
 
       finalthing = self.return_layer(blendtime)
 
-      
+
 
       return finalthing
   #lets say we have a letter such as ABCDEFG  right, right now the tokenizer will return all the index value's of thata item such as [0,1,2,3,4,5,6], but now that we know the index value, we need the
@@ -79,16 +82,9 @@
 
   tokenizer = Tokenizer()
 
-
   model = CharacterTransformer()
- 
 
-
- 
-
-
-  #Setting Up Training 
-
+  #Setting Up Training
 
   #Loss Function
   loss_fn = torch.nn.CrossEntropyLoss(label_smoothing=0.1)
@@ -100,18 +96,25 @@
   input_text = "abcdefg"
   target_text = "bcdefgh"
 
-  epoches = 15000
+  epoches = 1500
 
 
-  with open("corpus.txt", "r") as f:
-      text_data = f.read().lower().replace("\n"," ")
+  that = "To be or not to be that is the question whether tis nobler in the mind to suffer the slings and arrows of outrageous fortune or to take arms against a sea of troubles shall i compare thee to a summers day"
+
+
+  try:
+    with open("corpus.txt", "r") as f:
+        text_data = f.read().lower().replace("\n"," ")
+  except:
+    print("corpus.txt not found, switching to small alternitive example")
+    text_data = that.lower().replace("\n"," ")
 
 
 
   for epoch in range(epoches):
     optimizer.zero_grad()
     block_size = 32
-    
+
     max_start = len(text_data) - block_size - 1
     start_idx = random.randint(0, max_start)
 
@@ -120,9 +123,9 @@
 
     thatrandomresult = model.forward(torch.tensor([tokenizer.tokenize(in_the_model)]))
     theactualresult = (torch.tensor([tokenizer.tokenize(should_be_out_the_model)]))
-    
 
-   
+
+
 
     loss = loss_fn(thatrandomresult.transpose(1,2),theactualresult)
 
@@ -133,10 +136,10 @@
       print(f"LOSS:{loss} EPOCH:{epoch}")
       pred_ids = thatrandomresult.argmax(dim=-1)[0].tolist()
       print(f"TEXT:{tokenizer.decode(pred_ids)}")
-    
 
 
-  #So we need to first pritn the outputs: Aka the number's not the words, 
+
+  #So we need to first pritn the outputs: Aka the number's not the words,
 
   #And then we need to print out the targer (basically just a tokenized version of the item.)
 

@@ -54,6 +54,7 @@ Input Sequence (e.g., "abcdefg")
 ```
 Training Logs (v0.4 Baseline)
 Trained over 15,000 epochs on text corpus using random sequence chunking:
+
 ```
 LOSS:3.7378 EPOCH:0     | TEXT: rxqqqiqqqsszzzi4szzzszsccssczsqs
 LOSS:2.9702 EPOCH:200   | TEXT:    e    e t     t   t           
@@ -67,6 +68,8 @@ LOSS:2.0139 EPOCH:12800 | TEXT: r tren thur  shaprmtisanddheunht
 LOSS:2.0030 EPOCH:14400 | TEXT:  cctend ti cation and testfret a
 LOSS:2.3235 EPOCH:14800 | TEXT: uooiis  ng tndni and aerren anoo
 ```
+
+
 Project Structure
 ```
 

@@ -1,12 +1,12 @@
-# Mini-transformer (v0.4)
+# Mini-transformer (v0.5)
 
-> A lightweight, **Multi-Head** causal Transformer decoder written from scratch in native PyTorch. Built from first principles to study tensor geometry, multi-head attention dynamics, and sequence modeling without relying on high-level library abstractions.
+> A lightweight, **Multi-Head** causal Transformer decoder with a Feed-Forward Network written from scratch in native PyTorch. Built from first principles to study tensor geometry, multi-head attention dynamics, and sequence modeling without relying on high-level library abstractions.
 
 ---
 
 ## Overview
 
-**mini-transformer-pytorch** is an experimental character-level decoder-only language model. Version **v0.4** upgrades the self-attention architecture from a single head to **Multi-Head Self-Attention** ($h=4$), allowing the model to jointly process information from multiple representation subspaces simultaneously.
+**mini-transformer-pytorch** is an experimental character-level decoder-only language model. Version **v0.5** adds a FFN which allows the model to really "Think" better instead of spotting patterns, it recalls patterns from memory making the model better and more reliable.
 
 ### Key Technical Specs
 * **Tokenizer:** Custom character-level vocabulary (`vocab_size = 41`)
@@ -15,8 +15,13 @@
 * **Sequence Length (`block_size`):** $32$ characters
 * **Attention Mechanism:** Causal Multi-Head Self-Attention with Scaled Dot-Product & Causal Masking
 * **Optimizer:** `AdamW` ($\text{lr} = 1\text{e-}3$)
-* **Loss Function:** `CrossEntropyLoss` (with label smoothing = 0.1)
-
+* **Loss Function:** `CrossEntropyLoss` (now without label smoothing)
+* **FFN** `self.ff_layer = nn.Sequential(
+        nn.Linear(32,4 * emedding_dimensions),
+        nn.GELU(),
+        nn.Linear(4 * emedding_dimensions ,emedding_dimensions)
+    )`
+    
 ---
 
 ## Architectural Pipeline
@@ -50,9 +55,12 @@ Input Sequence (e.g., "abcdefg")
  [Batch, 4 Heads, Seq_Len, 8] ──► [Batch, Seq_Len, 32]
         │
         ▼
+Go through the FFN layer
+        │
+        ▼
  Linear Output Projection  [Batch, Seq_Len, Vocab_Size]
 ```
-Training Logs (v0.4 Baseline)
+Training Logs (v0.5 Baseline)
 Trained over 15,000 epochs on text corpus using random sequence chunking:
 
 ```

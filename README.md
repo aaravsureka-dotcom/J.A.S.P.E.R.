@@ -1,13 +1,13 @@
-# Mini-transformer (v0.5)
+# Mini-transformer (v1.0)
 
-> A lightweight, **Multi-Head** causal Transformer decoder with a Feed-Forward Network written from scratch in native PyTorch. Built from first principles to study tensor geometry, multi-head attention dynamics, and sequence modeling without relying on high-level library abstractions.
+> A lightweight, **Multi-Head**  Transformer decoder with a Feed-Forward Network, normalization layers, and mask's all written in native PyTorch, without the help of any pre-existing transformer libraries or functions E.G (`torch.nn.TransformerDecoder`, `torch.nn.Transformer`, `torch.nn.MultiheadAttention` , `torch.nn.functional.scaled_dot_product_attention`). Is uses CET for training with the help of AdamW for the backpropagation and training.
 
 ---
 
 ## Overview
 
-**mini-transformer-pytorch** is an experimental character-level decoder-only language model. Version **v0.5** adds a FFN which allows the model to really "Think" better instead of spotting patterns, it recalls patterns from memory making the model better and more reliable.
-
+**mini-transformer-pytorch** is an  character-level decoder-only language model built from scratch using PyTorch. Version 1.0 Introduces bug fixes, normalization and optimization to make the model run faster, and have high probabillity chances.
+`
 ### Key Technical Specs
 * **Tokenizer:** Custom character-level vocabulary (`vocab_size = 41`)
 * **Embedding Dimension ($d_{model}$):** $32$
@@ -21,69 +21,8 @@
         nn.GELU(),
         nn.Linear(4 * emedding_dimensions ,emedding_dimensions)
     )`
+* **Normilization layers**
     
 ---
 
-## Architectural Pipeline
 
-```text
-Input Sequence (e.g., "abcdefg")
-        │
-        ▼
-   Tokenizer (Token IDs: [0, 1, 2, ...])
-        │
-        ├──► Token Embedding Matrix  [Batch, Seq_Len, 32]
-        └──► Positional Embedding   [Batch, Seq_Len, 32]
-        │
-        ▼
- Summed Vector Representation (X) [Batch, Seq_Len, 32]
-        │
-        ├──► Query Projection (Q = X @ W_q)
-        ├──► Key Projection   (K = X @ W_k)
-        └──► Value Projection (V = X @ W_v)
-        │
-        ▼
- Multi-Head Reshaping & Transpose:
- [Batch, Seq_Len, 32] ──► [Batch, 4 Heads, Seq_Len, 8 Head_Dim]
-        │
-        ▼
- Causal Multi-Head Attention Score:
- Score = Softmax( (Q @ K^T) / sqrt(8) + Mask ) @ V
-        │
-        ▼
- Concatenate Heads & Reshape Back:
- [Batch, 4 Heads, Seq_Len, 8] ──► [Batch, Seq_Len, 32]
-        │
-        ▼
-Go through the FFN layer
-        │
-        ▼
- Linear Output Projection  [Batch, Seq_Len, Vocab_Size]
-```
-Training Logs (v0.5 Baseline)
-Trained over 15,000 epochs on text corpus using random sequence chunking:
-
-```
-LOSS:3.7378 EPOCH:0     | TEXT: rxqqqiqqqsszzzi4szzzszsccssczsqs
-LOSS:2.9702 EPOCH:200   | TEXT:    e    e t     t   t           
-LOSS:2.8953 EPOCH:1000  | TEXT: tirto  ai  te     antani aan nin
-LOSS:2.3357 EPOCH:2000  | TEXT: t n  ntenoinn tn shentnheneteng 
-LOSS:2.4831 EPOCH:4000  | TEXT: t ne toesut  re tn ninnin t nano
-LOSS:2.4033 EPOCH:6200  | TEXT: a n on tnd tnithatoite t n n  on
-LOSS:2.2811 EPOCH:8200  | TEXT: is  resuirys bnirtitdtd intin et
-LOSS:2.7162 EPOCH:10000 | TEXT: ng aocae aht   se thetd r aea re
-LOSS:2.0139 EPOCH:12800 | TEXT: r tren thur  shaprmtisanddheunht
-LOSS:2.0030 EPOCH:14400 | TEXT:  cctend ti cation and testfret a
-LOSS:2.3235 EPOCH:14800 | TEXT: uooiis  ng tndni and aerren anoo
-```
-
-
-Project Structure
-```
-
-├── corpus.txt          # Training text dataset
-├── model.py            # CharacterTransformer PyTorch multi-head architecture
-├── train.py            # Dataset sampling & training loop
-├── README.md           # Documentation
-└── LICENSE             # MIT License
-```

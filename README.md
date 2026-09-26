@@ -46,7 +46,7 @@
 
 
 
-  * **Previous Updates** *
+* **Previous Updates** *
     * v0.3: First version: a single head transformer with a training loop,  loss of 2.3 extremely fast, takes only 9 seconds to run 7000 epoches
     * v0.4: Second version: now a multi-headed transformer with a mask, allowing for more reliable loss values, loss of 2.2 with 10.5 seconds to run 7000 epoches
     * v0.5: Third version: now with a FFN (Feed-Forward Network) and residual connections to allow for deeper reasoning and thinking, a heavier, but more accurate model with a loss of 1.9 with 14 seconds to run 7000 epochs

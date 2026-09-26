@@ -6,7 +6,7 @@
 
 ## Overview
 
-**Nano-GPT** is an  character-level decoder-only language model built from scratch using PyTorch. Version 1.0 Introduces bug fixes, normalization and optimization to make the model run faster, and have high probabillity chances.
+**Nano-GPT** is an  character-level decoder-only language model built from scratch using PyTorch. Version 1.0 Introduces bug fixes, normalization and optimization to make the model run faster, and have a lower loss.
 `
 ### Key Technical Specs
 * **Tokenizer:** Custom character-level vocabulary (`vocab_size = 41`)
@@ -50,8 +50,12 @@
     * v0.3: First version: a single head transformer with a training loop,  loss of 2.3 extremely fast, takes only 9 seconds to run 7000 epoches
     * v0.4: Second version: now a multi-headed transformer with a mask, allowing for more reliable loss values, loss of 2.2 with 10.5 seconds to run 7000 epoches
     * v0.5: Third version: now with a FFN (Feed-Forward Network) and residual connections to allow for deeper reasoning and thinking, a heavier, but more accurate model with a loss of 1.9 with 14 seconds to run 7000 epochs
-    * v1.0: Final version: now the ffn now uses GELU() instead of ReLu(), Normalization layer's are added as well as making sure that the tokenizer only adds characters in the list. More bug fixes as well as redoing the residual                      connections, adding a generation loop, changed the type of mask and added weight saving within the model. A heavy model, but is still able to run fast with a loss of 0.3 with 15 seconds to run all 7000 epoches
+    * v1.0: Final version: now the ffn now uses GELU() instead of ReLu(), Normalization layer's are added as well as making sure that the tokenizer only adds characters in the list. More bug fixes as well as redoing the residual                      connections, adding a generation loop, changed the type of mask and added weight saving within the model. A heavy model, but is still able to run fast with a loss of 0.32 with 15 seconds to run all 7000 epoches
 
     All test's were conducted with the same corpus.txt, same performance mode ran on the CPU of a RYZEN 9 6900HX with a VRAM of around 12gb
+
+** Version 1.0 training + loss **
+Training was conducted on a 275 word piece of text of Shakespeare with an average loss of 0.32 over 500% less than version 0.5
+
 
 
